@@ -1,0 +1,78 @@
+{
+  "name": "todo-list-app",
+  "version": "1.0.0",
+  "description": "A simple todo list application built with Electron and React",
+  "author": "Your Name",
+  "main": "public/electron.js",
+  "homepage": "./",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/todo-list-app.git"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "electron-dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "postinstall": "electron-builder install-app-deps",
+    "preelectron-pack": "npm run build",
+    "electron-pack": "electron-builder build --win -c.extraMetadata.main=build/electron.js"
+  },
+  "dependencies": {
+    "electron-is-dev": "^2.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^5.0.1",
+    "electron-store": "^8.0.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "concurrently": "^6.2.0",
+    "cross-env": "^7.0.3",
+    "electron": "^13.1.7",
+    "electron-builder": "^22.14.13",
+    "wait-on": "^6.0.0",
+    "react-app-rewired": "^2.2.1",
+    "crypto-browserify": "^3.12.0",
+    "stream-browserify": "^3.0.0",
+    "assert": "^2.0.0",
+    "stream-http": "^3.2.0",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "url": "^0.11.0",
+    "buffer": "^6.0.3",
+    "process": "^0.11.10",
+    "path-browserify": "^1.0.1"
+  },
+  "build": {
+    "appId": "com.example.todo-list-app",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "package.json",
+      {
+        "from": "public",
+        "to": "build",
+        "filter": ["electron.js", "preload.js"]
+      }
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "publish": null
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
